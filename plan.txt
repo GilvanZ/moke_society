@@ -1,0 +1,7 @@
+Fazer eles procurar por comida
+eles terão barra de vida, fome por inicio
+se o moke tiver mais de x de comida, ele começa a vender por um preço aleatorio baseado na ganancia dele
+os moke procurarão pelos preço mais barato caso tenha mais de x> de dinheiro
+os mokes trabalharão, e cada profissão pode ganhar mais dinheiro
+os mokes irão se reproduzir e morrer e nascerão outros mokes
+horário no game
