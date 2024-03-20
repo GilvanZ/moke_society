@@ -1,7 +1,11 @@
 import random
 
 class Moke:
-    def __init__(self, name, age, gender, occupation):
+    def __init__(self, name, age, gender, occupation, y, x, move_direction,speed=0.5):
+        self.speed = speed
+        self.move_direction = move_direction
+        self.y = y
+        self.x = x
         self.name = name
         self.age = age
         self.gender = gender
@@ -44,18 +48,43 @@ class Moke:
         print(f"Favorite color: {self.favorite_color}")
         print(f"Favorite hobby: {self.favorite_hobby0}, {self.favorite_hobby1} e {self.favorite_hobby2}")
 
-    
+    #spawn a moke
+    def spawn(self, pygame, surface):
+        #sprites
+        sprite = []
+        for i in range(6):
+            sprite.append(pygame.image.load(f'accets\\stay\\sty{i}.png'))
 
+        # Controles de animação
+        if not hasattr(self, "clock"):
+            self.clock = 0
+        if not hasattr(self, "sprite_index"):
+            self.sprite_index = random.randint(0,len(sprite)-1)
 
-    #draw a moke
-    def draw(self, pygame, surface, x,y):
-        pygame.draw.circle(surface, (100, 2, 25), (x, y), 7)
+        # Atualiza o índice do sprite
+        if self.clock == 700 or self.clock == random.randint(150,690):
+            self.sprite_index = random.randint(0,len(sprite)-1)
+            self.clock = 0
+        self.clock += 1
+        print(self.clock)
 
-    def reproduction(self,):
-        love = 0
-        
+        # Desenha o sprite atual na tela
+        surface.blit(sprite[self.sprite_index], (self.x, self.y))
 
-# Example usage:
-if __name__ == "__main__":
-    moke = Moke("John", 30, "Male", "Software Engineer")
-    moke.display_info()
+    def move(self):
+        # Verifica se o macaco precisa mudar de direção
+        if random.randint(1, 100) == 1 or not self.move_direction:
+            self.move_direction = random.choice(["up", "down", "left", "right", "stay","stay","stay",])
+
+        # Move o moke na direção atual
+        if self.move_direction == "up":
+            self.y -= self.speed
+        elif self.move_direction == "down":
+            self.y += self.speed
+        elif self.move_direction == "left":
+            self.x -= self.speed
+        elif self.move_direction == "right":
+            self.x += self.speed
+            
+        if self.y < 0 or self.y > 720 or self.x < 0 or self.x > 1200:
+            self.move_direction = random.choice(["up", "down", "left", "right", "stay"])

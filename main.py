@@ -3,11 +3,6 @@ from Mokes.moke import Moke
 import random
 import os
 
-#random int
-def rand(val1, val2):
-    i = random.randint(val1,val2) 
-    return i
-
 # Initialize Pygame
 pygame.init()
 # Set up the screen
@@ -20,17 +15,16 @@ pygame.display.set_caption("MOKES")
 #moke_model = Moke("Brian",22,"male","Farmer")
 #moke_model.display_info()
 
-moke_one_male = Moke("John", 17, "Male", "just a monkey")
-moke_one_female = Moke("cassy", 18, "Male", "just a monkey")
-
-
 
 # Chamada da função para obter o gênero e nome escolhidos
 chosen_gender, chosen_name = Moke.moke_gender()
-
-moke_one= Moke(chosen_name,20,chosen_gender,"estudante")
+moke_one= Moke(chosen_name,20,chosen_gender,"estudante",100,500,"stay")
 moke_one.display_info()
 
+
+#moke position
+moke_position_x = []
+moke_position_y = []
 
 # Main game loop
 running = True
@@ -50,11 +44,12 @@ while running:
             pygame.draw.rect(screen, (30, 150, 40), (x, y, TILE_SIZE, TILE_SIZE))
 
 
-
-
-
+    moke_one.spawn(pygame,screen)
+    moke_one.move()
+    
 
     # Update the display
     pygame.display.flip()
 # Quit Pygame
 pygame.quit()
+os.system("cls")
