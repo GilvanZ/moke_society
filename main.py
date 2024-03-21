@@ -15,7 +15,7 @@ pygame.display.set_caption("MOKES")
 #tile
 TILE_SIZE = 32
 
-# Chamada da função para obter o gênero e nome escolhidos
+# Call function to get chosen gender and name
 chosen_gender, chosen_name = Moke.moke_gender()
 #moke_one= Moke(chosen_name,20,chosen_gender,325,800,"stay",pygame,screen)
 #moke_one.display_info()
@@ -34,7 +34,7 @@ for i in range(10):
     
 #Sprites    
 #tiles_sprites_resized = []
-# Carregue e redimensione cada imagem para 32x32
+# Load and resize each image to 32x32
 #for i in range(5):
 #    tile = pygame.image.load(f'accets\cenary\grass\grass{i}.png')
 #    tile_resized = pygame.transform.scale(tile, (TILE_SIZE, TILE_SIZE))
@@ -62,7 +62,6 @@ while running:
 
     for moke in population['mokes']:
         moke.move()
-        
     
     
 
