@@ -25,26 +25,25 @@ population = {
     'names': []
 }
 
-for i in range(15):
+for i in range(10):
     chosen_gender, chosen_name = Moke.moke_gender()
-    population['mokes'].append(Moke(chosen_name, random.randint(5, 18), chosen_gender, random.randint(0, 700), random.randint(0, 1180), "stay", pygame, screen,1.5))
+    population['mokes'].append(Moke(chosen_name, random.randint(5, 18), chosen_gender, random.randint(0, 700), random.randint(0, 1180), "stay", pygame, screen,1))
     population['names'].append(chosen_name)
     print(chosen_name)
     
-tiles_sprites_resized = []
-
-# Carregue e redimensione cada imagem para 32x32
-for i in range(5):
-    tile = pygame.image.load(f'accets\cenary\grass\grass{i}.png')
-    tile_resized = pygame.transform.scale(tile, (TILE_SIZE, TILE_SIZE))
-    tiles_sprites_resized.append(tile_resized)
     
-
-tiles_on_screen = []
-for x in range(0, screen_width, TILE_SIZE):
-    for y in range(0, screen_height, TILE_SIZE):
-        random_tile_index = random.randint(0, 4)
-        tiles_on_screen.append((tiles_sprites_resized[random_tile_index], (x, y)))
+#Sprites    
+#tiles_sprites_resized = []
+# Carregue e redimensione cada imagem para 32x32
+#for i in range(5):
+#    tile = pygame.image.load(f'accets\cenary\grass\grass{i}.png')
+#    tile_resized = pygame.transform.scale(tile, (TILE_SIZE, TILE_SIZE))
+#    tiles_sprites_resized.append(tile_resized)
+#tiles_on_screen = []
+#for x in range(0, screen_width, TILE_SIZE):
+#    for y in range(0, screen_height, TILE_SIZE):
+#        random_tile_index = random.randint(0, 4)
+#        tiles_on_screen.append((tiles_sprites_resized[random_tile_index], (x, y)))
         
 
 
@@ -58,11 +57,11 @@ while running:
     screen.fill((30, 150, 40))
     
     #tiles
-    for tile, position in tiles_on_screen:
-        screen.blit(tile, position)
+    #for tile, position in tiles_on_screen:
+    #    screen.blit(tile, position)
 
     for moke in population['mokes']:
-        moke.move(screen)
+        moke.move()
         
     
     

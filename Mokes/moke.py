@@ -1,4 +1,5 @@
 import random
+import pygame
 
 class Moke:
     def __init__(self, name, age, gender, y, x, move_direction, pygame, surface, speed=0.5,):
@@ -51,7 +52,9 @@ class Moke:
         print(f"Favorite hobby: {self.favorite_hobby0}, {self.favorite_hobby1} e {self.favorite_hobby2}")
 
     #spawn a moke
-    def move(self,surface):
+    def move(self):
+        font = pygame.font.Font(None,15)
+        text_surface = font.render(self.name, True, (0,0,0,50))
         sprite_speed = 15
         # Verifica se o macaco precisa mudar de direção
         if random.randint(1, 500) == 1 or not self.move_direction:
@@ -76,8 +79,9 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
-            self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))        
-                
+            self.surface.blit(text_surface, (self.x-5,self.y-10))
+            self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
+
         elif self.move_direction == "down":
             self.y += self.speed
             sprite = []
@@ -96,6 +100,7 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
+            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
                 
             
@@ -117,6 +122,7 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
+            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
                 
             
@@ -138,6 +144,7 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
+            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
             
             
@@ -159,6 +166,7 @@ class Moke:
                 self.clock = 0
             self.clock += 1
                 # Desenha o sprite atual na tela
+            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
             
             
@@ -171,6 +179,3 @@ class Moke:
             self.move_direction = random.choice(["up", "down", "right", "stay"])
         elif self.x >= 1170:
             self.move_direction = random.choice(["up", "down", "left", "stay"])
-
-    
-    
