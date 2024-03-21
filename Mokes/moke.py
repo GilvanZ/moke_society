@@ -52,7 +52,7 @@ class Moke:
 
     #spawn a moke
     def move(self,surface):
-        sprite_speed = 5
+        sprite_speed = 15
         # Verifica se o macaco precisa mudar de direção
         if random.randint(1, 500) == 1 or not self.move_direction:
             self.move_direction = random.choice(["up", "down", "left", "right", "stay"])
@@ -171,3 +171,6 @@ class Moke:
             self.move_direction = random.choice(["up", "down", "right", "stay"])
         elif self.x >= 1170:
             self.move_direction = random.choice(["up", "down", "left", "stay"])
+
+    
+    
