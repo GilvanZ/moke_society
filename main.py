@@ -11,21 +11,21 @@ screen_height = 720
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("MOKES")
 
-#Model Moke
-#moke_model = Moke("Brian",22,"male","Farmer")
-#moke_model.display_info()
-
-
 # Chamada da função para obter o gênero e nome escolhidos
 chosen_gender, chosen_name = Moke.moke_gender()
-moke_one= Moke(chosen_name,20,chosen_gender,"estudante",325,800,"stay",pygame,screen)
+moke_one= Moke(chosen_name,20,chosen_gender,325,800,"stay",pygame,screen)
 moke_one.display_info()
 
+population = {
+    'mokes': [],
+    'names': []
+}
 
-#moke position
-moke_position_x = []
-moke_position_y = []
-
+for i in range(10):
+    chosen_gender, chosen_name = Moke.moke_gender()
+    population['mokes'].append(Moke(chosen_name, random.randint(5, 18), chosen_gender, random.randint(0, 700), random.randint(0, 1180), "stay", pygame, screen,1))
+    population['names'].append(chosen_name)
+    print(chosen_name)
 # Main game loop
 running = True
 while running:
@@ -34,6 +34,7 @@ while running:
             running = False
     # Fill the screen with white
     screen.fill((30, 150, 40))
+  
 
 
     #Tile
@@ -43,13 +44,14 @@ while running:
         for y in range(0, screen_height, TILE_SIZE):
             pygame.draw.rect(screen, (30, 150, 40), (x, y, TILE_SIZE, TILE_SIZE))
 
-
-    moke_one.spawn(screen)
-    moke_one.move()
+    for moke in population['mokes']:
+        moke.move(screen)
+        
+    
     
 
     # Update the display
     pygame.display.flip()
 # Quit Pygame
 pygame.quit()
-os.system("cls")
+#os.system("cls")
