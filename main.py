@@ -18,7 +18,7 @@ pygame.display.set_caption("MOKES")
 
 # Chamada da função para obter o gênero e nome escolhidos
 chosen_gender, chosen_name = Moke.moke_gender()
-moke_one= Moke(chosen_name,20,chosen_gender,"estudante",100,500,"stay")
+moke_one= Moke(chosen_name,20,chosen_gender,"estudante",325,800,"stay",pygame,screen)
 moke_one.display_info()
 
 
@@ -44,7 +44,7 @@ while running:
             pygame.draw.rect(screen, (30, 150, 40), (x, y, TILE_SIZE, TILE_SIZE))
 
 
-    moke_one.spawn(pygame,screen)
+    moke_one.spawn(screen)
     moke_one.move()
     
 
