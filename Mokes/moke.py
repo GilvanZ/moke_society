@@ -19,10 +19,15 @@ class Moke:
         self.favorite_hobby0 = self.choose_random_attribute("Mokes\\hobbies.txt")
         self.favorite_hobby1 = self.choose_random_attribute("Mokes\\hobbies.txt")
         self.favorite_hobby2 = self.choose_random_attribute("Mokes\\hobbies.txt")
+        self.fonte = pygame.font.Font(None,15)
+        self.screen_width = 1200
+        self.screen_height = 720
+        self.life = 100
+        self.hungry = 100
 
 
     def choose_random_attribute(self, file_name):
-        with open(file_name, "r") as file:
+        with open(file_name, "r", encoding="utf-8") as file:
             attributes = [line.strip() for line in file]
             return random.choice(attributes)
 
@@ -53,8 +58,6 @@ class Moke:
 
     #spawn a moke
     def move(self):
-        font = pygame.font.Font(None,15)
-        text_surface = font.render(self.name, True, (0,0,0,50))
         sprite_speed = 15
         # Verifica se o macaco precisa mudar de direção
         if random.randint(1, 500) == 1 or not self.move_direction:
@@ -79,7 +82,6 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
-            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
 
         elif self.move_direction == "down":
@@ -100,7 +102,6 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
-            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
                 
             
@@ -122,7 +123,6 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
-            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
                 
             
@@ -144,7 +144,6 @@ class Moke:
                 self.clock = 0
             self.clock += 1
             # Desenha o sprite atual na tela
-            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
             
             
@@ -166,16 +165,51 @@ class Moke:
                 self.clock = 0
             self.clock += 1
                 # Desenha o sprite atual na tela
-            self.surface.blit(text_surface, (self.x-5,self.y-10))
             self.surface.blit(sprite[self.sprite_index-1], (self.x, self.y))
             
             
         #stay only in border
-        if self.y <= 0:
+        if self.y <= 25:
             self.move_direction = random.choice(["down", "left", "right", "stay"])
-        elif self.y >= 690:
+        elif self.y >= 720-25:
             self.move_direction = random.choice(["up", "left", "right", "stay"])
-        elif self.x <= 0:
+        elif self.x <= 25:
             self.move_direction = random.choice(["up", "down", "right", "stay"])
-        elif self.x >= 1170:
+        elif self.x >= 1200-25:
             self.move_direction = random.choice(["up", "down", "left", "stay"])
+    def GUIscrren(self):
+        #Dower
+        dower = pygame.transform.scale(self.pygame.image.load(f'accets\GUI\GUIdown.png'),(1200,50))
+        self.surface.blit(dower,(0,680))
+        #Upper
+        upper = pygame.transform.scale(self.pygame.image.load(f'accets\GUI\GUIupper.png'),(1200,50))
+        self.surface.blit(upper,(0,0))
+    
+    def status(self):
+        #GUI base
+        gui_x, gui_y = 350, 100
+        base = pygame.transform.scale(self.pygame.image.load(f'accets\GUI\status_base1.png'), (500, 500))
+        self.surface.blit(base,(gui_x,gui_y))
+        
+        #name
+        text_name = self.fonte.render(self.name, True, (0,0,0,200))
+        self.surface.blit(text_name, (gui_x+230,gui_y+20))
+        
+        #ocupation
+        text_occupation = self.fonte.render(self.occupation, True, (0,0,0,200))
+        self.surface.blit(text_occupation, (gui_x+2,gui_y+15))
+        
+        #Hobbye
+        text_hobbye0 = self.fonte.render(self.favorite_hobby0, True, (0,0,0,200))
+        self.surface.blit(text_hobbye0, (gui_x+2,gui_y+25))
+        
+        #life
+        bar_base = 350
+        status_bar = pygame.transform.scale(pygame.image.load(f'accets\GUI\statusbar.png'),(bar_base,40))
+        self.surface.blit(status_bar, (gui_x+70,gui_y+100))
+        
+        progression_bar = pygame.transform.scale(pygame.image.load(f'accets\GUI\statusprogress.png'),(bar_base-10,29))
+        self.surface.blit(progression_bar, (gui_x+76,gui_y+105))
+        
+        
+        

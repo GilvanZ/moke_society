@@ -27,9 +27,17 @@ population = {
 
 for i in range(10):
     chosen_gender, chosen_name = Moke.moke_gender()
-    population['mokes'].append(Moke(chosen_name, random.randint(5, 18), chosen_gender, random.randint(0, 700), random.randint(0, 1180), "stay", pygame, screen,1))
-    population['names'].append(chosen_name)
-    print(chosen_name)
+    population['mokes'].append(
+        Moke(
+            chosen_name, random.randint(5, 18),
+            chosen_gender, random.randint(0, 700), 
+            random.randint(0, 1180), 
+            "stay", 
+            pygame, 
+            screen,
+            1
+        )
+    )
     
     
 #Sprites    
@@ -46,7 +54,6 @@ for i in range(10):
 #        tiles_on_screen.append((tiles_sprites_resized[random_tile_index], (x, y)))
         
 
-
 # Main game loop
 running = True
 while running:
@@ -61,9 +68,12 @@ while running:
     #    screen.blit(tile, position)
 
     for moke in population['mokes']:
+        moke_rect = pygame.Rect(moke.x, moke.y, 30, 30)
+        if moke_rect.collidepoint(pygame.mouse.get_pos()):
+            moke.status()
         moke.move()
-    
-    
+        
+  
 
     # Update the display
     pygame.display.flip()
